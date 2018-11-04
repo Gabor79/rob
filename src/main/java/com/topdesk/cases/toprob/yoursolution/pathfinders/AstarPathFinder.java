@@ -61,11 +61,11 @@ public class AstarPathFinder implements IPathFinder<Coordinate> {
                     boolean contains = open.contains(neighbour);
                     if (!contains || tentF < fScore.get(neighbour)) {
                         fScore.put(neighbour, tentF + distanceStrategy.apply(neighbour, kitchen));
-                        if (contains) {
-                            open.remove(neighbour);
+                        if (!contains) {
+                            open.offer(neighbour);
+                            fromMap.put(neighbour, current);
                         }
-                        open.offer(neighbour);
-                        fromMap.put(neighbour, current);
+
                     }
                 }
             }
